@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/main.css" />
+  </head>
+
+  <body>
+    <form>
+      <input type="text" id="resultado" value="0" disabled />
+
+      <div class="line1">
+        <input type="button" id="button" value="1" onclick="agregarNumero(1)" />
+        <input type="button" id="button" value="2" onclick="agregarNumero(2)" />
+        <input type="button" id="button" value="3" onclick="agregarNumero(3)" />
+        <input type="button" id="button" value="+" onclick="operar('+')" />
+      </div>
+      <div class="line1">
+        <input type="button" id="button" value="4" onclick="agregarNumero(4)" />
+        <input type="button" id="button" value="5" onclick="agregarNumero(5)" />
+        <input type="button" id="button" value="6" onclick="agregarNumero(6)" />
+        <input type="button" id="button" value="-" onclick="operar('-')" />
+      </div>
+      <div class="line1">
+        <input type="button" id="button" value="7" onclick="agregarNumero(7)" />
+        <input type="button" id="button" value="8" onclick="agregarNumero(8)" />
+        <input type="button" id="button" value="9" onclick="agregarNumero(9)" />
+        <input type="button" id="button" value="x" onclick="operar('*')" />
+      </div>
+      <div class="line1">
+        <input type="button" id="button" value="C" onclick="borrar()" />
+        <input type="button" id="button" value="0" onclick="agregarNumero(0)" />
+        <input type="button" id="button" value="=" onclick="operar('=')" />
+        <input type="button" id="button" value="/" onclick="operar('/')" />
+      </div>
+    </form>
+
+    <script>
+      // Declara variables
+      let resultado = "0";
+      let numero1 = "";
+      let numero2 = "";
+      let operador = "";
+
+      // Función para agregar números a la pantalla
+      function agregarNumero(num) {
+        if (operador == "") {
+          numero1 = numero1 + num;
+          resultado = numero1;
+        } else {
+          numero2 = numero2 + num;
+          resultado = numero2;
+        }
+        document.getElementById("resultado").value = resultado;
+      }
+
+      // Función para realizar una operación
+      //parseInt("123"); // devuelve 123
+      function operar(op) {
+        if (op == "=") {
+          if (operador == "+") {
+            resultado = parseInt(numero1) + parseInt(numero2);
+          } else if (operador == "-") {
+            resultado = parseInt(numero1) - parseInt(numero2);
+          } else if (operador == "*") {
+            resultado = parseInt(numero1) * parseInt(numero2);
+          } else if (operador == "/") {
+            resultado = parseInt(numero1) / parseInt(numero2);
+          }
+          operador = "";
+          numero1 = "";
+          numero2 = "";
+        } else {
+          operador = op;
+        }
+        document.getElementById("resultado").value = resultado;
+      }
+
+      // Función para borrar la pantalla
+      function borrar() {
+        resultado = "0";
+        numero1 = "";
+        numero2 = "";
+        operador = "";
+        document.getElementById("resultado").value = resultado;
+      }
+    </script>
+  </body>
+</html>
